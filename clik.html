@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Clicker</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f8f8f8;
+        }
+
+        #autoClicker {
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="autoClicker">Start Auto Clicker</div>
+    <script>
+        let isAutoClickerActive = false;
+        let clickInterval;
+        const clickDelay = 2000; // Задержка между автокликами в миллисекундах
+
+        document.getElementById('autoClicker').addEventListener('click', toggleAutoClicker);
+
+        function toggleAutoClicker() {
+            isAutoClickerActive = !isAutoClickerActive;
+
+            if (isAutoClickerActive) {
+                startAutoClicker();
+                document.getElementById('autoClicker').textContent = 'Stop Auto Clicker';
+            } else {
+                stopAutoClicker();
+                document.getElementById('autoClicker').textContent = 'Start Auto Clicker';
+            }
+        }
+
+        function startAutoClicker() {
+            clickInterval = setInterval(autoClick, clickDelay);
+        }
+
+        function stopAutoClicker() {
+            clearInterval(clickInterval);
+        }
+
+        function autoClick() {
+            const clickX = Math.random() * window.innerWidth;
+            const clickY = Math.random() * window.innerHeight;
+
+            document.elementFromPoint(clickX, clickY).click();
+        }
+    </script>
+</body>
+</html>
